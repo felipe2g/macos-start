@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if command -v brew &> /dev/null; then
+if command -v brew; then
 	echo "Você já possui o homebrew instalado" 
 else 
 	echo "Homebrew não encontrado. Instalando Homebrew..."
