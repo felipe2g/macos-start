@@ -74,6 +74,19 @@ if command -v zsh &> /dev/null && [ "$install_zsh" = "s" ]; then
 
 	if [ "$install_zsh" = "s" ]; then
 		brew install zsh
+
+		# Adicionar ao .zshrc do usuário logado
+		PROFILE_FILE="/Users/$(whoami)/.zshrc"
+		BREW_SHELLENV='eval "$(/opt/homebrew/bin/brew shellenv)"'
+		
+		# Adicionar a linha ao .zshrc se não estiver presente
+		if ! grep -Fxq "$BREW_SHELLENV" "$PROFILE_FILE"; then
+		  echo "" >> "$PROFILE_FILE"
+		  echo "$BREW_SHELLENV" >> "$PROFILE_FILE"
+		fi
+		
+		# Executar o comando no shell atual
+		eval "$(/opt/homebrew/bin/brew shellenv)"
 	fi
 #zsh isnt installed
 else
